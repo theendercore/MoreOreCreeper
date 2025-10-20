@@ -4,6 +4,17 @@ fabric-loom = "1.11-SNAPSHOT"
 iridium = "3.5.0"
 # Dependencies
 fzzy-config = "0.7.2+1.21"
+ore-creeper = "eoY8IXwE" # fabric-1.21.1-1.3.2
+
+# Support Mods
+randomium = "fabric_1.21-1.33.3"
+enderscape = "ugyRyzwc" # fabric-1.1.1+mc1.21.1
+mythicmetals = "0.24.4+1.21"
+oritech = "wd4TniHb" # fabric 0.19.0
+jewelry = "2.1.2+1.21.1-fabric"
+# myb add this
+architects_palette = "x"
+
 # QoL
 modmenu = "11.0.3"
 emi = "1.1.22+1.21.1"
@@ -14,6 +25,15 @@ imguimc = "1.21.1-1.0.8"
 [libraries]
 # Dependencies
 fzzy-config = { module = "me.fzzyhmstrs:fzzy_config", version.ref = "fzzy-config" }
+ore-creeper = { module = "maven.modrinth:ore-creeper", version.ref = "ore-creeper" }
+
+# Support Mods
+randomium = { module = "maven.modrinth:randomium-ore", version.ref = "randomium" }
+enderscape = { module = "maven.modrinth:enderscape", version.ref = "enderscape" }
+mythicmetals = { module = "maven.modrinth:mythicmetals", version.ref = "mythicmetals" }
+oritech = { module = "maven.modrinth:oritech", version.ref = "oritech" }
+jewelry = { module = "maven.modrinth:jewelry", version.ref = "jewelry" }
+
 # QoL
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 emi = { module = "dev.emi:emi-fabric", version.ref = "emi" }

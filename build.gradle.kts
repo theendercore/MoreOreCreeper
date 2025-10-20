@@ -24,6 +24,23 @@ repositories {
         }
     }
     maven("https://api.modrinth.com/maven") { content { includeGroup("maven.modrinth") } }
+
+    // Oh god Dependencies
+    // mixson
+    exclusiveContent { forRepository { maven("https://jitpack.io") }; filter { includeGroup("com.github.ramixin") } }
+    // yacl
+    maven("https://maven.isxander.dev/releases")
+    // Athena (CTM)
+    maven("https://maven.teamresourceful.com/repository/maven-public/")
+    // GeckoLib
+    maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+    // owo-lib
+    maven("https://maven.wispforest.io/releases/")
+    // CC
+    maven("https://maven.ladysnake.org/releases")
+    // Archy
+    maven("https://maven.architectury.dev/")
+
     mavenCentral()
 }
 
@@ -43,6 +60,13 @@ dependencies {
     modImplementation(fileTree("libs"))
     // Dependencies
     modImplementation(libs.fzzy.config)
+    modImplementation(libs.ore.creeper)
+    // Support Mods
+    modCompileOnly(libs.randomium)
+    modCompileOnly(libs.enderscape)
+    modCompileOnly(libs.mythicmetals)
+    modCompileOnly(libs.oritech)
+    modCompileOnly(libs.jewelry)
     // QoL
     modImplementation(libs.modmenu)
     modCompileOnly("${libs.emi.get()}:api")
