@@ -13,7 +13,7 @@ mythicmetals = "0.24.4+1.21"
 oritech = "wd4TniHb" # fabric 0.19.0
 jewelry = "2.1.2+1.21.1-fabric"
 # myb add this
-architects_palette = "x"
+# architects_palette = "x"
 
 # QoL
 modmenu = "11.0.3"
