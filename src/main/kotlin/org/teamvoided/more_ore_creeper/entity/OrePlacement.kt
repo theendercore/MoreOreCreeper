@@ -15,7 +15,10 @@ class OrePlacement(
 ) {
     fun tryPlace(world: Level, pos: BlockPos): Boolean {
         if (world.getBlockState(pos).`is`(replaceList)) {
-            world.setBlock(pos, oreState.getState(world.random, pos), 3)
+            val state = oreState.getState(world.random, pos)
+            if (state.isAir) return false
+
+            world.setBlock(pos, state, Block.UPDATE_ALL)
             return true
         }
         return false
@@ -24,7 +27,8 @@ class OrePlacement(
     companion object {
         val CODEC = RecordCodecBuilder.mapCodec {
             it.group(
-                RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("replace_list").forGetter(OrePlacement::replaceList),
+                RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("replace_list")
+                    .forGetter(OrePlacement::replaceList),
                 BlockStateProvider.CODEC.fieldOf("ore_block").forGetter(OrePlacement::oreState),
             ).apply(it, ::OrePlacement)
         }
