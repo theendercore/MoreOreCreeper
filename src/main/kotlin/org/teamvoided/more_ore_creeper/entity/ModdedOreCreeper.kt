@@ -3,35 +3,74 @@ package org.teamvoided.more_ore_creeper.entity
 import com.cozary.ore_creeper.entities.AbstractOreCreeperEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.core.HolderLookup
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.level.Level
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
+import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
 import org.teamvoided.more_ore_creeper.init.MOCRegistries
+import kotlin.math.ceil
+import kotlin.math.pow
+import kotlin.math.sqrt
 
-//import com.cozary.ore_creeper.entities.CopperCreeperEntity
 @Suppress("UnstableApiUsage")
 class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Level) :
     AbstractOreCreeperEntity(type, level), VariantHolder<Holder<OreCreeperVariant>> {
+    constructor(level: Level) : this(MOCEntityTypes.MODDED_ORE_CREEPER, level)
+
+    init {
+        variant = lookup().getOrThrow(OreCreeperVariants.DEFAULT)
+    }
+
     override fun setVariant(variant: Holder<OreCreeperVariant>) {
         setAttached(ORE_CREEPER_VARIANT, variant.unwrapKey().get())
     }
 
     override fun getVariant(): Holder<OreCreeperVariant> {
-        val key = getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.DEFAULT)
-        return level().registryAccess().lookupOrThrow(MOCRegistries.ORE_CREEPER_VARIANT).getOrThrow(key)
+        return lookup().getOrThrow(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.DEFAULT))
     }
 
+    fun lookup(): HolderLookup.RegistryLookup<OreCreeperVariant> =
+        level().registryAccess().lookupOrThrow(MOCRegistries.ORE_CREEPER_VARIANT)
+
     override fun explodeCreeper() {
-        val variant = getVariant().value()
-        if (level().isClientSide) {
-            if (variant.particles.isEmpty()) return
+        val variant = variant.value()
+        if (!level().isClientSide) {
+            dead = true
+            val radius = variant.radius * if (isPowered) 1.5f else 1f
+            val r = ceil(radius).toInt()
+            if (variant.orePlacements.isNotEmpty())
+            for (x in -r..r) {
+                for (y in -r..r) {
+                    for (z in -r..r) {
+                        val pos = BlockPos((x + this.x).toInt(), (y + this.y).toInt(), (z + this.z).toInt())
+                        if (sqrt(x.toDouble().pow(2.0) + y.toDouble().pow(2.0) + z.toDouble().pow(2.0)) <= radius) {
+                            for (ore in variant.orePlacements) {
+                                if (ore.tryPlace(level(), pos)) {
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            level().broadcastEntityEvent(this, 14)
+            discard()
+            triggerOnDeathMobEffects(RemovalReason.KILLED)
+            spawnLingeringCloud()
+        }
+    }
+
+    override fun handleEntityEvent(b: Byte) {
+        if (b.toInt() == 14) {
+            if (variant.value().particles.isEmpty()) return
 
             val maxSpeed = 0.5
             for (i in 0..500) {
-                val particle = variant.particles.random()
+                val particle = variant.value().particles.random()
                 try {
                     level().addParticle(
                         particle,
@@ -45,28 +84,11 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
                     )
                 } catch (e: Exception) {
                     log.warn("Could not spawn particle effect {}", particle)
+                    break
                 }
             }
-
         } else {
-            dead = true
-            val r = (variant.radius * if (isPowered) 1.5f else 1f).toInt()
-            // Explode
-            for (x in -r..r) {
-                for (y in -r..r) {
-                    for (z in -r..r) {
-                        val pos = BlockPos(x, y, z)
-                        for (ore in variant.orePlacements) {
-                            if (ore.tryPlace(level(), pos)) {
-                                break
-                            }
-                        }
-                    }
-                }
-            }
-            discard()
-            triggerOnDeathMobEffects(RemovalReason.KILLED)
-            spawnLingeringCloud()
+            super.handleEntityEvent(b)
         }
     }
 }
