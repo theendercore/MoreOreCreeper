@@ -14,11 +14,7 @@ import org.slf4j.LoggerFactory
 import org.teamvoided.more_ore_creeper.config.TemplateConfig
 import org.teamvoided.more_ore_creeper.entity.ModdedOreCreeper
 import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
-import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes
-import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
-import org.teamvoided.more_ore_creeper.init.MOCItems
-import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
-import org.teamvoided.more_ore_creeper.init.MOCRegistries
+import org.teamvoided.more_ore_creeper.init.*
 import org.teamvoided.more_ore_creeper.init.MOCRegistries.ORE_CREEPER_VARIANT
 
 @Suppress("unused")
