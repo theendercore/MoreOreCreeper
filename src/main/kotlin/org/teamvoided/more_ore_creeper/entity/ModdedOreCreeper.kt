@@ -15,6 +15,7 @@ import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
 import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
 import org.teamvoided.more_ore_creeper.init.MOCRegistries
+import kotlin.jvm.optionals.getOrElse
 import kotlin.math.ceil
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -40,7 +41,8 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     }
 
     override fun getVariant(): Holder<OreCreeperVariant> {
-        return lookup().getOrThrow(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.DEFAULT))
+        return lookup().get(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.DEFAULT))
+            .getOrElse { lookup().getOrThrow(OreCreeperVariants.DEFAULT) }
     }
 
     fun lookup(): HolderLookup.RegistryLookup<OreCreeperVariant> =
@@ -86,9 +88,9 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
                     level().addParticle(
                         particle,
                         false,
-                        (x + 0.5) + (random.nextGaussian() * random.nextGaussian() * 0.02),
-                        (y) + (random.nextGaussian() * random.nextGaussian() * 0.02),
-                        (z + 0.5) + (random.nextGaussian() * random.nextGaussian() * 0.02),
+                        x + (random.nextGaussian() * random.nextGaussian() * 0.02),
+                        (y + 0.5) + (random.nextGaussian() * random.nextGaussian() * 0.02),
+                        z + (random.nextGaussian() * random.nextGaussian() * 0.02),
                         random.nextGaussian() * maxSpeed,
                         random.nextGaussian() * maxSpeed,
                         random.nextGaussian() * maxSpeed
