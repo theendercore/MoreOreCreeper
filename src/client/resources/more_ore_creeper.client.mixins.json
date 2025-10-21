@@ -4,6 +4,7 @@
   "package": "org.teamvoided.more_ore_creeper.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "ItemColorsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

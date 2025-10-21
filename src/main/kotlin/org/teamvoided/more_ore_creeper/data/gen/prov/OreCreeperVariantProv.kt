@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
+import org.teamvoided.more_ore_creeper.data.tags.MOCBiomeTags
+import org.teamvoided.more_ore_creeper.data.tags.MOCBlockTags
 import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.entity.OrePlacement
 import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
@@ -32,40 +34,30 @@ object OreCreeperVariantProv {
         c.registerDefault(OreCreeperVariants.DEFAULT)
         c.register(
             OreCreeperVariants.RANDOMIUM,
-            BiomeTags.IS_OVERWORLD,
-            tempTexture,
-            listOf(color(.23f, 1f, 0f)),
-            RADIUS,
+            BiomeTags.IS_OVERWORLD, tempTexture, listOf(color(0xff_76428a)), RADIUS,
             listOf(
                 c.placement(
-                    BlockTags.STONE_ORE_REPLACEABLES,
+                    MOCBlockTags.STONE_ORE_REPLACEABLE,
                     Randomium.RANDOMIUM_ORE.get() to 6, Blocks.AIR to 4,
                 ),
                 c.placement(
-                    BlockTags.DEEPSLATE_ORE_REPLACEABLES,
+                    MOCBlockTags.DEEPSLATE_ORE_REPLACEABLE,
                     Randomium.RANDOMIUM_ORE_DEEP.get() to 6, Blocks.AIR to 4,
                 ),
                 c.placement(
-                    BlockTags.INFINIBURN_END,
+                    MOCBlockTags.END_ORE_REPLACEABLE,
                     Randomium.RANDOMIUM_ORE_END.get() to 6, Blocks.AIR to 4,
                 )
-            )
+            ),
+            0xff_847e87 to 0xff_76428a
         )
     }
 
     fun BootstrapContext<OreCreeperVariant>.registerDefault(registryKey: ResourceKey<OreCreeperVariant>): Holder.Reference<OreCreeperVariant> {
         return this.register(
-            registryKey,
-            BiomeTags.IS_OVERWORLD,
-            tempTexture,
-            listOf(color(.5f, .5f, .5f)),
-            RADIUS,
-            listOf(
-                placement(
-                    BlockTags.STONE_ORE_REPLACEABLES,
-                    Blocks.DIAMOND_BLOCK to 1, Blocks.DIAMOND_ORE to 6, Blocks.AIR to 3,
-                )
-            )
+            registryKey, MOCBiomeTags.VOID, MISSING,
+            listOf(color(0x0), color(0xff_76428a)),
+            RADIUS, listOf(), 0xff_ffffff to 0xff_00_00_00
         )
     }
 
@@ -76,16 +68,23 @@ object OreCreeperVariantProv {
         particles: List<ColorParticleOption>,
         radius: Float,
         orePlacements: List<OrePlacement>,
+        spawnEggColors: Pair<Number, Number>,
     ): Holder.Reference<OreCreeperVariant> {
         return this.register(
             key,
-            OreCreeperVariant(lookup(Registries.BIOME).getOrThrow(biomes), texture, particles, radius, orePlacements)
+            OreCreeperVariant(
+                lookup(Registries.BIOME).getOrThrow(biomes),
+                texture,
+                particles,
+                radius,
+                orePlacements,
+                spawnEggColors.first.toInt(), spawnEggColors.second.toInt()
+            )
         )
     }
 
 
-    fun BootstrapContext<OreCreeperVariant>.placement(tag: TagKey<Block>, vararg blocks: Pair<Block, Int>)
-            : OrePlacement =
+    fun BootstrapContext<OreCreeperVariant>.placement(tag: TagKey<Block>, vararg blocks: Pair<Block, Int>) =
         statePlacement(tag, *blocks.map { it.first.defaultBlockState() to it.second }.toTypedArray())
 
     fun BootstrapContext<OreCreeperVariant>.statePlacement(
@@ -99,8 +98,8 @@ object OreCreeperVariantProv {
         return OrePlacement(lookup(Registries.BLOCK).getOrThrow(tag), WeightedStateProvider(list))
     }
 
-    fun color(r: Float, g: Float, b: Float): ColorParticleOption =
-        ColorParticleOption.create(MOCParticleTypes.COLORED_EXPLOSION, r, g, b)
+    fun color(color: Long) = color(color.toInt())
+    fun color(color: Int): ColorParticleOption = ColorParticleOption.create(MOCParticleTypes.COLORED_EXPLOSION, color)
 
     fun texture(name: String): ResourceLocation = id("entity/ore_creeper/$name")
 

@@ -15,7 +15,9 @@ data class OreCreeperVariant(
     val texture: ResourceLocation,
     val particles: List<ColorParticleOption>,
     val radius: Float,
-    val orePlacements: List<OrePlacement>
+    val orePlacements: List<OrePlacement>,
+    val spawnEggColor1: Int,
+    val spawnEggColor2: Int,
 ) {
     fun getTextureLoc() = getFullTextureId(texture)
 
@@ -24,10 +26,15 @@ data class OreCreeperVariant(
             it.group(
                 RegistryCodecs.homogeneousList(Registries.BIOME).fieldOf("biomes").forGetter(OreCreeperVariant::biomes),
                 ResourceLocation.CODEC.fieldOf("texture").forGetter(OreCreeperVariant::texture),
-                ColorParticleOption.codec(MOCParticleTypes.COLORED_EXPLOSION).codec().listOf().fieldOf("particles").forGetter(OreCreeperVariant::particles),
+                ColorParticleOption.codec(MOCParticleTypes.COLORED_EXPLOSION).codec().listOf().fieldOf("particles")
+                    .forGetter(OreCreeperVariant::particles),
                 Codec.FLOAT.fieldOf("explosion_radius").forGetter(OreCreeperVariant::radius),
-                OrePlacement.CODEC.codec().listOf().fieldOf("ore_placements").forGetter(OreCreeperVariant::orePlacements),
-            ).apply(it, ::OreCreeperVariant)
+                OrePlacement.CODEC.codec().listOf().fieldOf("ore_placements")
+                    .forGetter(OreCreeperVariant::orePlacements),
+                Codec.INT.fieldOf("spawn_egg_color_1").forGetter(OreCreeperVariant::spawnEggColor1),
+                Codec.INT.fieldOf("spawn_egg_color_2").forGetter(OreCreeperVariant::spawnEggColor2),
+
+                ).apply(it, ::OreCreeperVariant)
         }
 
         private fun getFullTextureId(texture: ResourceLocation): ResourceLocation =
