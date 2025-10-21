@@ -8,7 +8,7 @@ import org.teamvoided.more_ore_creeper.init.MOCRegistries.ORE_CREEPER_VARIANT
 
 object OreCreeperVariants {
     val VARIANTS = mutableListOf<ResourceKey<OreCreeperVariant>>()
-    val DEFAULT = create("default")
+    val MISING = create("mising")
 
     val RANDOMIUM = create("randomium", "randomium")
 

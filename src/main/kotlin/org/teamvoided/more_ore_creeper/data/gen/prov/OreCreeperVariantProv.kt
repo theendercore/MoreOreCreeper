@@ -9,7 +9,6 @@ import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BiomeTags
-import net.minecraft.tags.BlockTags
 import net.minecraft.tags.TagKey
 import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.world.level.biome.Biome
@@ -31,7 +30,7 @@ object OreCreeperVariantProv {
     const val RADIUS = 3.75f
 
     fun bootstrap(c: BootstrapContext<OreCreeperVariant>) {
-        c.registerDefault(OreCreeperVariants.DEFAULT)
+        c.registerDefault(OreCreeperVariants.MISING)
         c.register(
             OreCreeperVariants.RANDOMIUM,
             BiomeTags.IS_OVERWORLD, tempTexture, listOf(color(0xff_76428a)), RADIUS,

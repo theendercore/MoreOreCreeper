@@ -16,6 +16,7 @@ import org.teamvoided.more_ore_creeper.init.MOCRegistries
 class CustomSpawnEggItem(entityType: EntityType<out Mob>, i: Int, j: Int, properties: Properties) :
     SpawnEggItem(entityType, i, j, properties) {
 
+    @Suppress("DEPRECATION")
     override fun getDescriptionId(stack: ItemStack): String {
         val default = descriptionId
         val nbt = stack.get(DataComponents.ENTITY_DATA)?.unsafe ?: return default
@@ -50,6 +51,7 @@ class CustomSpawnEggItem(entityType: EntityType<out Mob>, i: Int, j: Int, proper
         fun getVariant() {
         }
 
+        @Suppress("DEPRECATION")
         @JvmStatic
         fun getCustomColor(stack: ItemStack, i: Int): Int? {
             val nbt = stack.get(DataComponents.ENTITY_DATA)?.unsafe ?: return null

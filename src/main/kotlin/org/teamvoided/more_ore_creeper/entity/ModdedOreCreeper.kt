@@ -26,14 +26,14 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     constructor(level: Level) : this(MOCEntityTypes.MODDED_ORE_CREEPER, level)
 
     override fun getTypeName(): Component {
-        if (!variant.`is`(OreCreeperVariants.DEFAULT)) {
+        if (!variant.`is`(OreCreeperVariants.MISING)) {
             return Component.translatable(Util.makeDescriptionId("entity.$MODID", variant.unwrapKey().get().location()))
         }
         return super.getTypeName()
     }
 
     init {
-        variant = lookup().getOrThrow(OreCreeperVariants.DEFAULT)
+        variant = lookup().getOrThrow(OreCreeperVariants.MISING)
     }
 
     override fun setVariant(variant: Holder<OreCreeperVariant>) {
@@ -41,8 +41,8 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     }
 
     override fun getVariant(): Holder<OreCreeperVariant> {
-        return lookup().get(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.DEFAULT))
-            .getOrElse { lookup().getOrThrow(OreCreeperVariants.DEFAULT) }
+        return lookup().get(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.MISING))
+            .getOrElse { lookup().getOrThrow(OreCreeperVariants.MISING) }
     }
 
     fun lookup(): HolderLookup.RegistryLookup<OreCreeperVariant> =
