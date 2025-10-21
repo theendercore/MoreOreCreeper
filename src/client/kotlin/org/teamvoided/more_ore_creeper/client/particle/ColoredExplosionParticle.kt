@@ -3,6 +3,7 @@ package org.teamvoided.more_ore_creeper.client.particle
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
 import net.minecraft.core.particles.ColorParticleOption
+import java.lang.Math.clamp
 
 class ColoredExplosionParticle(
     level: ClientLevel,
@@ -40,9 +41,9 @@ class ColoredExplosionParticle(
         ): Particle {
             val particle = ColoredExplosionParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, sprites)
             particle.setColor(
-                options.red + (Math.random().toFloat() * 2f - 1f) * 0.05f,
-                options.green + (Math.random().toFloat() * 2f - 1f) * 0.05f,
-                options.blue + (Math.random().toFloat() * 2f - 1f) * 0.05f,
+                clamp(options.red + (Math.random().toFloat() * 2f - 1f) * 0.05f, 0f, 1f),
+                clamp(options.green + (Math.random().toFloat() * 2f - 1f) * 0.05f, 0f, 1f),
+                clamp(options.blue + (Math.random().toFloat() * 2f - 1f) * 0.05f, 0f, 1f),
             )
             return particle
         }
