@@ -1,12 +1,15 @@
 package org.teamvoided.more_ore_creeper.entity
 
 import com.cozary.ore_creeper.entities.AbstractOreCreeperEntity
+import net.minecraft.Util
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
+import net.minecraft.network.chat.Component
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.level.Level
+import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
@@ -20,6 +23,13 @@ import kotlin.math.sqrt
 class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Level) :
     AbstractOreCreeperEntity(type, level), VariantHolder<Holder<OreCreeperVariant>> {
     constructor(level: Level) : this(MOCEntityTypes.MODDED_ORE_CREEPER, level)
+
+    override fun getTypeName(): Component {
+        if (!variant.`is`(OreCreeperVariants.DEFAULT)) {
+            return Component.translatable(Util.makeDescriptionId("entity.$MODID", variant.unwrapKey().get().location()))
+        }
+        return super.getTypeName()
+    }
 
     init {
         variant = lookup().getOrThrow(OreCreeperVariants.DEFAULT)
@@ -42,15 +52,16 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
             dead = true
             val radius = variant.radius * if (isPowered) 1.5f else 1f
             val r = ceil(radius).toInt()
-            if (variant.orePlacements.isNotEmpty())
-            for (x in -r..r) {
-                for (y in -r..r) {
-                    for (z in -r..r) {
-                        val pos = BlockPos((x + this.x).toInt(), (y + this.y).toInt(), (z + this.z).toInt())
-                        if (sqrt(x.toDouble().pow(2.0) + y.toDouble().pow(2.0) + z.toDouble().pow(2.0)) <= radius) {
-                            for (ore in variant.orePlacements) {
-                                if (ore.tryPlace(level(), pos)) {
-                                    break
+            if (variant.orePlacements.isNotEmpty()) {
+                for (x in -r..r) {
+                    for (y in -r..r) {
+                        for (z in -r..r) {
+                            val pos = BlockPos((x + this.x).toInt(), (y + this.y).toInt(), (z + this.z).toInt())
+                            if (sqrt(x.toDouble().pow(2.0) + y.toDouble().pow(2.0) + z.toDouble().pow(2.0)) <= radius) {
+                                for (ore in variant.orePlacements) {
+                                    if (ore.tryPlace(level(), pos)) {
+                                        break
+                                    }
                                 }
                             }
                         }
