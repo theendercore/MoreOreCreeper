@@ -12,6 +12,7 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.gen.prov.BiomeTagsProvider
 import org.teamvoided.more_ore_creeper.data.gen.prov.BlockTagsProvider
+import org.teamvoided.more_ore_creeper.data.gen.prov.EnglishTranslationProvider
 import org.teamvoided.more_ore_creeper.data.gen.prov.OreCreeperVariantProv
 import org.teamvoided.more_ore_creeper.init.MOCRegistries
 import java.util.concurrent.CompletableFuture
@@ -25,6 +26,8 @@ object MoreOreCreeperData : DataGeneratorEntrypoint {
         pack.addProvider(::BlockTagsProvider)
         pack.addProvider(::BiomeTagsProvider)
         pack.addProvider(::DynRegProvider)
+
+        pack.addProvider(::EnglishTranslationProvider)
     }
 
     override fun buildRegistry(gen: RegistrySetBuilder) {

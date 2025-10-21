@@ -10,12 +10,13 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 import org.teamvoided.more_ore_creeper.entity.ModdedOreCreeper
 
 object MOCEntityTypes {
+    val ID =  id("modded_ore_creeper")
     val MODDED_ORE_CREEPER = Registry.register(
-        BuiltInRegistries.ENTITY_TYPE, id("modded_ore_creeper"),
+        BuiltInRegistries.ENTITY_TYPE, ID,
         EntityType.Builder.of(::ModdedOreCreeper, MobCategory.MONSTER)
             .sized(0.6f, 1.7f)
             .clientTrackingRange(8)
-            .build(id("modded_ore_creeper").toString())
+            .build(ID.toString())
     )
 
     fun init() {

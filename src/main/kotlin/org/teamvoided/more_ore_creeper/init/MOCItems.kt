@@ -12,8 +12,9 @@ import org.teamvoided.more_ore_creeper.init.MOCRegistries.ORE_CREEPER_VARIANT
 import org.teamvoided.more_ore_creeper.item.CustomSpawnEggItem
 
 object MOCItems {
-    val MODDED_ORE_CREEPER_SPAWN_EGG = Registry.register(
-        BuiltInRegistries.ITEM, id("modded_ore_creeper_spawn_egg"),
+    const val EGG = "modded_ore_creeper_spawn_egg"
+    val MODDED_ORE_CREEPER_SPAWN_EGG: CustomSpawnEggItem = Registry.register(
+        BuiltInRegistries.ITEM, id(EGG),
         CustomSpawnEggItem(MODDED_ORE_CREEPER, 0, -1, Item.Properties())
     )
 
