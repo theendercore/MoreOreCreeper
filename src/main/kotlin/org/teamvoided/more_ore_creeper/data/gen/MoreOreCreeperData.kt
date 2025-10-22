@@ -20,7 +20,6 @@ import java.util.concurrent.CompletableFuture
 @Suppress("unused")
 object MoreOreCreeperData : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(gen: FabricDataGenerator) {
-        log.info("Hello from DataGen")
         val pack = gen.createPack()
 
         pack.addProvider(::BlockTagsProvider)

@@ -14,7 +14,6 @@ object OreCreeperVariants {
 
     fun create(path: String) = create(id(path))
     fun create(namespace: String, path: String) = create(id(namespace, path))
-
     fun create(id: ResourceLocation): ResourceKey<OreCreeperVariant> {
         val key = ResourceKey.create(ORE_CREEPER_VARIANT, id)
         VARIANTS.add(key)

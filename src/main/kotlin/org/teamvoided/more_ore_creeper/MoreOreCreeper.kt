@@ -28,7 +28,6 @@ object MoreOreCreeper {
     var config = ConfigApi.registerAndLoadConfig(::TemplateConfig)
 
     fun init() {
-        log.info("Hello from Common")
         MOCParticleTypes.init()
         MOCRegistries.init()
         MOCAttachmentTypes.init()

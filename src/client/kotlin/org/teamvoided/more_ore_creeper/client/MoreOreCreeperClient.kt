@@ -11,10 +11,8 @@ import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
 @Suppress("unused")
 object MoreOreCreeperClient {
     fun init() {
-        MoreOreCreeper.log.info("Hello from Client")
         ParticleFactoryRegistry.getInstance()
             .register(MOCParticleTypes.COLORED_EXPLOSION, ColoredExplosionParticle::Factory)
         EntityRendererRegistry.register(MOCEntityTypes.MODDED_ORE_CREEPER, ::ModdedOreCreeperRenderer)
-
     }
 }
