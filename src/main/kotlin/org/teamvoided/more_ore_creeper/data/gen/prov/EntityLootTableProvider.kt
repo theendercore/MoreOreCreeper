@@ -2,6 +2,7 @@ package org.teamvoided.more_ore_creeper.data.gen.prov
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions
 import net.mehvahdjukaar.randomium.Randomium
 import net.minecraft.advancements.critereon.*
 import net.minecraft.core.HolderLookup
@@ -24,7 +25,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
-import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
+import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.misc.customLootTable
@@ -48,7 +49,7 @@ class EntityLootTableProvider(o: FabricDataOutput, r: CompletableFuture<HolderLo
         item: Item, max: Int, lootMax: Int,
         block: Item, blockMax: Int, blockChance: Float,
     ) {
-        accept(
+        getConditional(variant).accept(
             customLootTable(variant),
             LootTable.lootTable()
                 .pool(
@@ -74,7 +75,6 @@ class EntityLootTableProvider(o: FabricDataOutput, r: CompletableFuture<HolderLo
     }
 
 
-
     fun shouldSmeltLoot(): AnyOfCondition.Builder {
         val enchant = registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(EnchantmentTags.SMELTS_LOOT)
         return AnyOfCondition.anyOf(
@@ -96,7 +96,15 @@ class EntityLootTableProvider(o: FabricDataOutput, r: CompletableFuture<HolderLo
         )
     }
 
+    fun BiConsumer<ResourceKey<LootTable>, LootTable.Builder>.getConditional(variant: ResourceKey<OreCreeperVariant>): BiConsumer<ResourceKey<LootTable>, LootTable.Builder> {
+        if (variant.location().namespace != MODID) {
+            return withConditions(this, ResourceConditions.allModsLoaded(variant.location().namespace))
+        }
+        return this
+    }
+
     fun <T : LootPoolEntryContainer.Builder<T>> LootPoolEntryContainer.Builder<T>.conditionally(builder: LootItemCondition.Builder): T =
         this.`when`(builder)
 }
+
 
