@@ -56,7 +56,7 @@ object OreCreeperVariantProv {
         return this.register(
             registryKey, MOCBiomeTags.VOID, MISSING,
             listOf(color(0x0), color(0xff_76428a)),
-            RADIUS, listOf(), 0xff_ffffff to 0xff_00_00_00
+            RADIUS, listOf(), 0xff_00_00_00 to 0xff_76428a
         )
     }
 
