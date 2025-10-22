@@ -10,6 +10,6 @@ import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
 fun customLootTable(variant: ResourceKey<OreCreeperVariant>): ResourceKey<LootTable> {
     return ResourceKey.create(
         Registries.LOOT_TABLE,
-        id(variant.location().withPrefix("entity/$MODID/").toString().replace(":", "/"))
+        id(variant.location().toString().replace(":", "/")).withPrefix("entity/$MODID/")
     )
 }
