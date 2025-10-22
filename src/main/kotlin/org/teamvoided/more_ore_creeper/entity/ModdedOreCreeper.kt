@@ -6,15 +6,18 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.storage.loot.LootTable
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
 import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
 import org.teamvoided.more_ore_creeper.init.MOCRegistries
+import org.teamvoided.more_ore_creeper.misc.customLootTable
 import kotlin.jvm.optionals.getOrElse
 import kotlin.math.ceil
 import kotlin.math.pow
@@ -26,7 +29,7 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     constructor(level: Level) : this(MOCEntityTypes.MODDED_ORE_CREEPER, level)
 
     override fun getTypeName(): Component {
-        if (!variant.`is`(OreCreeperVariants.MISING)) {
+        if (!isMising()) {
             return Component.translatable(Util.makeDescriptionId("entity.$MODID", variant.unwrapKey().get().location()))
         }
         return super.getTypeName()
@@ -47,6 +50,12 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
 
     fun lookup(): HolderLookup.RegistryLookup<OreCreeperVariant> =
         level().registryAccess().lookupOrThrow(MOCRegistries.ORE_CREEPER_VARIANT)
+
+    fun isMising() = variant.`is`(OreCreeperVariants.MISING)
+
+    override fun getDefaultLootTable(): ResourceKey<LootTable> {
+        return if (!isMising()) customLootTable(variant.unwrapKey().get()) else super.getDefaultLootTable()
+    }
 
     override fun explodeCreeper() {
         val variant = variant.value()
