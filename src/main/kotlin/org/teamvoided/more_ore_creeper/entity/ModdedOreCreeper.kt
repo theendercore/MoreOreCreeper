@@ -12,6 +12,7 @@ import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.storage.loot.LootTable
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
+import org.teamvoided.more_ore_creeper.MoreOreCreeper.config
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
@@ -91,7 +92,7 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
             if (variant.value().particles.isEmpty()) return
 
             val maxSpeed = 0.5
-            for (i in 0..500) {
+            for (i in 0..config.creeperParticleAmount) {
                 val particle = variant.value().particles.random()
                 try {
                     level().addParticle(

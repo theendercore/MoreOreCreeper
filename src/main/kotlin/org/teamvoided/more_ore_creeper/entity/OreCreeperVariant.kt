@@ -33,8 +33,7 @@ data class OreCreeperVariant(
                     .forGetter(OreCreeperVariant::orePlacements),
                 Codec.INT.fieldOf("spawn_egg_color_1").forGetter(OreCreeperVariant::spawnEggColor1),
                 Codec.INT.fieldOf("spawn_egg_color_2").forGetter(OreCreeperVariant::spawnEggColor2),
-
-                ).apply(it, ::OreCreeperVariant)
+            ).apply(it, ::OreCreeperVariant)
         }
 
         private fun getFullTextureId(texture: ResourceLocation): ResourceLocation =

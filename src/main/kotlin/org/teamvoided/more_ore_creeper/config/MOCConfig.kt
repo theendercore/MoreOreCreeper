@@ -9,10 +9,10 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 
 @Suppress("unused")
-class TemplateConfig : Config(id(MODID)) {
+class MOCConfig : Config(id(MODID)) {
     var groupName = ConfigGroup("group_id", false)
     var commonEntry = ValidatedInt(0, 10, -10, TEXTBOX_WITH_BUTTONS)
     @NonSync
     @ConfigGroup.Pop
-    var clientEntry = true
+    var creeperParticleAmount = 500
 }

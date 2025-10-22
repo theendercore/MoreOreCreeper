@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceLocation
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
+import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
+import org.teamvoided.more_ore_creeper.init.MOCItems
 import org.teamvoided.more_ore_creeper.init.MOCItems.EGG
 import java.util.concurrent.CompletableFuture
 
@@ -23,6 +25,7 @@ class EnglishTranslationProvider(o: FabricDataOutput, r: CompletableFuture<Holde
             gen.add("entity.$MODID.$lang", genLang(id) + " Creper")
         }
         gen.add(MOCEntityTypes.MODDED_ORE_CREEPER, genLang(MOCEntityTypes.ID))
+        gen.add(MOCItems.MODDED_ORE_CREEPER_SPAWN_EGG, genLang(id(EGG)))
     }
 
     private fun genLang(id: ResourceLocation): String =

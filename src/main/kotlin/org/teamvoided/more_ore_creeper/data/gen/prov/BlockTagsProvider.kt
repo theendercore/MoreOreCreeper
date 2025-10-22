@@ -1,6 +1,5 @@
 package org.teamvoided.more_ore_creeper.data.gen.prov
 
-import net.bunten.enderscape.registry.tag.EnderscapeBlockTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider.BlockTagProvider
 import net.minecraft.core.HolderLookup

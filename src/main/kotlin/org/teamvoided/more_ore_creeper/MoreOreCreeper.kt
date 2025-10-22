@@ -11,7 +11,7 @@ import net.minecraft.core.Holder
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.teamvoided.more_ore_creeper.config.TemplateConfig
+import org.teamvoided.more_ore_creeper.config.MOCConfig
 import org.teamvoided.more_ore_creeper.entity.ModdedOreCreeper
 import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.init.*
@@ -25,7 +25,7 @@ object MoreOreCreeper {
     val log: Logger = LoggerFactory.getLogger(MoreOreCreeper::class.simpleName)
 
     @JvmField
-    var config = ConfigApi.registerAndLoadConfig(::TemplateConfig)
+    var config = ConfigApi.registerAndLoadConfig(::MOCConfig)
 
     fun init() {
         MOCParticleTypes.init()

@@ -48,17 +48,13 @@ class CustomSpawnEggItem(entityType: EntityType<out Mob>, i: Int, j: Int, proper
             return stack
         }
 
-        fun getVariant() {
-        }
-
         @Suppress("DEPRECATION")
         @JvmStatic
         fun getCustomColor(stack: ItemStack, i: Int): Int? {
             val nbt = stack.get(DataComponents.ENTITY_DATA)?.unsafe ?: return null
             if (nbt.contains(COLOR)) {
                 try {
-                    val colors = nbt.getString(COLOR).split(":")
-                    return colors[i].toInt()
+                    return nbt.getString(COLOR).split(":")[i].toInt()
                 } catch (_: Exception) {
                 }
             }

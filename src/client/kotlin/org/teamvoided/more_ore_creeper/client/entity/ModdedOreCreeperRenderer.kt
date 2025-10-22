@@ -25,13 +25,16 @@ class ModdedOreCreeperRenderer(context: EntityRendererProvider.Context) :
         creeper.variant.value().getTextureLoc()
 
     init {
-         @Suppress("UNCHECKED_CAST")
-         this.addLayer(
-             CreeperPowerLayer(
-                 this as RenderLayerParent<Creeper?, CreeperModel<Creeper?>?>,
-                 context.modelSet
-             ) as RenderLayer<ModdedOreCreeper?, CreeperModel<ModdedOreCreeper>?>
-         )
+        try {
+            @Suppress("UNCHECKED_CAST")
+            this.addLayer(
+                CreeperPowerLayer(
+                    this as RenderLayerParent<Creeper?, CreeperModel<Creeper?>?>,
+                    context.modelSet
+                ) as RenderLayer<ModdedOreCreeper?, CreeperModel<ModdedOreCreeper>?>
+            )
+        } catch (_: Error) {
+        }
     }
 
     override fun scale(creeper: ModdedOreCreeper, poseStack: PoseStack, f: Float) {

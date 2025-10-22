@@ -9,10 +9,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
-class OrePlacement(
-    val replaceList: HolderSet<Block>,
-    val oreState: BlockStateProvider,
-) {
+class OrePlacement(val replaceList: HolderSet<Block>, val oreState: BlockStateProvider) {
     fun tryPlace(world: Level, pos: BlockPos): Boolean {
         if (world.getBlockState(pos).`is`(replaceList)) {
             val state = oreState.getState(world.random, pos)
