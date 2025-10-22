@@ -29,14 +29,14 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     constructor(level: Level) : this(MOCEntityTypes.MODDED_ORE_CREEPER, level)
 
     override fun getTypeName(): Component {
-        if (!isMising()) {
+        if (!isMissing()) {
             return Component.translatable(Util.makeDescriptionId("entity.$MODID", variant.unwrapKey().get().location()))
         }
         return super.getTypeName()
     }
 
     init {
-        variant = lookup().getOrThrow(OreCreeperVariants.MISING)
+        variant = lookup().getOrThrow(OreCreeperVariants.MISSING)
     }
 
     override fun setVariant(variant: Holder<OreCreeperVariant>) {
@@ -44,17 +44,17 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     }
 
     override fun getVariant(): Holder<OreCreeperVariant> {
-        return lookup().get(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.MISING))
-            .getOrElse { lookup().getOrThrow(OreCreeperVariants.MISING) }
+        return lookup().get(getAttachedOrElse(ORE_CREEPER_VARIANT, OreCreeperVariants.MISSING))
+            .getOrElse { lookup().getOrThrow(OreCreeperVariants.MISSING) }
     }
 
     fun lookup(): HolderLookup.RegistryLookup<OreCreeperVariant> =
         level().registryAccess().lookupOrThrow(MOCRegistries.ORE_CREEPER_VARIANT)
 
-    fun isMising() = variant.`is`(OreCreeperVariants.MISING)
+    fun isMissing() = variant.`is`(OreCreeperVariants.MISSING)
 
     override fun getDefaultLootTable(): ResourceKey<LootTable> {
-        return if (!isMising()) customLootTable(variant.unwrapKey().get()) else super.getDefaultLootTable()
+        return if (!isMissing()) customLootTable(variant.unwrapKey().get()) else super.getDefaultLootTable()
     }
 
     override fun explodeCreeper() {

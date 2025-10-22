@@ -16,7 +16,7 @@ object MOCAttachmentTypes {
     val ORE_CREEPER_VARIANT: AttachmentType<ResourceKey<OreCreeperVariant>> =
         AttachmentRegistry.create(id("ore_creeper_variant")) { builder ->
             builder
-                .initializer { OreCreeperVariants.MISING }
+                .initializer { OreCreeperVariants.MISSING }
                 .persistent(ResourceKey.codec(MOCRegistries.ORE_CREEPER_VARIANT))
                 .syncWith(ResourceKey.streamCodec(MOCRegistries.ORE_CREEPER_VARIANT), AttachmentSyncPredicate.all())
         }

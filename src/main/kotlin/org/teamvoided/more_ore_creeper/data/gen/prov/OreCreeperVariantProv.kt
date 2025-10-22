@@ -25,12 +25,12 @@ import org.teamvoided.more_ore_creeper.entity.OrePlacement
 import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
 
 object OreCreeperVariantProv {
-    val MISSING = texture("mising")
+    val MISSING = texture("missing")
     val tempTexture = id("ore_creeper", "entity/coal_creeper")
     const val RADIUS = 3.75f
 
     fun bootstrap(c: BootstrapContext<OreCreeperVariant>) {
-        c.registerDefault(OreCreeperVariants.MISING)
+        c.registerDefault(OreCreeperVariants.MISSING)
         c.register(
             OreCreeperVariants.RANDOMIUM,
             BiomeTags.IS_OVERWORLD, tempTexture, listOf(color(0xff_76428a)), RADIUS,
