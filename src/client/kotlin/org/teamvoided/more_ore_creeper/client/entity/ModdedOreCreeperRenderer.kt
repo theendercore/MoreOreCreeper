@@ -7,8 +7,12 @@ import net.minecraft.client.model.CreeperModel
 import net.minecraft.client.model.geom.ModelLayers
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.MobRenderer
+import net.minecraft.client.renderer.entity.RenderLayerParent
+import net.minecraft.client.renderer.entity.layers.CreeperPowerLayer
+import net.minecraft.client.renderer.entity.layers.RenderLayer
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
+import net.minecraft.world.entity.monster.Creeper
 import org.teamvoided.more_ore_creeper.entity.ModdedOreCreeper
 
 
@@ -21,13 +25,13 @@ class ModdedOreCreeperRenderer(context: EntityRendererProvider.Context) :
         creeper.variant.value().getTextureLoc()
 
     init {
-        /* @Suppress("UNCHECKED_CAST")
+         @Suppress("UNCHECKED_CAST")
          this.addLayer(
              CreeperPowerLayer(
                  this as RenderLayerParent<Creeper?, CreeperModel<Creeper?>?>,
                  context.modelSet
              ) as RenderLayer<ModdedOreCreeper?, CreeperModel<ModdedOreCreeper>?>
-         )*/
+         )
     }
 
     override fun scale(creeper: ModdedOreCreeper, poseStack: PoseStack, f: Float) {
