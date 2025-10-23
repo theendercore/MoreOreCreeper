@@ -1,18 +1,21 @@
 package org.teamvoided.more_ore_creeper.config
 
+import me.fzzyhmstrs.fzzy_config.annotations.Comment
 import me.fzzyhmstrs.fzzy_config.annotations.NonSync
 import me.fzzyhmstrs.fzzy_config.config.Config
-import me.fzzyhmstrs.fzzy_config.config.ConfigGroup
-import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedInt
-import me.fzzyhmstrs.fzzy_config.validation.number.ValidatedNumber.WidgetType.TEXTBOX_WITH_BUTTONS
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 
 @Suppress("unused")
 class MOCConfig : Config(id(MODID)) {
-    var groupName = ConfigGroup("group_id", false)
-    var commonEntry = ValidatedInt(0, 10, -10, TEXTBOX_WITH_BUTTONS)
+    @Comment("Same setting as the original mod, but only for modded creepers")
+    var moddedCreepersExplodeLikeVanillaOnes = false
+
+    @Comment("Some modded creepers may still explode like regular crepers as specified by datapacks. This setting prevents this from happening")
+    var customExplodeEffects = true
+
     @NonSync
-    @ConfigGroup.Pop
     var creeperParticleAmount = 500
+
+    fun isBlowUp() = moddedCreepersExplodeLikeVanillaOnes
 }

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.Level.ExplosionInteraction
 import net.minecraft.world.level.storage.loot.LootTable
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.config
@@ -59,31 +60,41 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
     }
 
     override fun explodeCreeper() {
+        if (level().isClientSide) return
+        dead = true
         val variant = variant.value()
-        if (!level().isClientSide) {
-            dead = true
-            val radius = variant.radius * if (isPowered) 1.5f else 1f
-            val r = ceil(radius).toInt()
-            if (variant.orePlacements.isNotEmpty()) {
-                for (x in -r..r) {
-                    for (y in -r..r) {
-                        for (z in -r..r) {
-                            val pos = BlockPos((x + this.x).toInt(), (y + this.y).toInt(), (z + this.z).toInt())
-                            if (sqrt(x.toDouble().pow(2.0) + y.toDouble().pow(2.0) + z.toDouble().pow(2.0)) <= radius) {
-                                for (ore in variant.orePlacements) {
-                                    if (ore.tryPlace(level(), pos)) {
-                                        break
-                                    }
-                                }
+        val radius = variant.radius * if (isPowered) 1.5f else 1f
+        explodeEffects(variant, radius)
+        level().broadcastEntityEvent(this, 14)
+        discard()
+        triggerOnDeathMobEffects(RemovalReason.KILLED)
+        spawnLingeringCloud()
+    }
+
+    fun explodeEffects(variant: OreCreeperVariant, radius: Float) {
+        if (isMissing()) return
+
+        val r = ceil(radius).toInt()
+        level().explode(
+            this, x, y, z,
+            if (config.isBlowUp()) radius else 0f,
+            if (config.isBlowUp()) ExplosionInteraction.MOB else ExplosionInteraction.NONE
+        )
+
+        if (variant.orePlacements.isEmpty()) return
+        for (x in -r..r) {
+            for (y in -r..r) {
+                for (z in -r..r) {
+                    val pos = BlockPos((x + this.x).toInt(), (y + this.y).toInt(), (z + this.z).toInt())
+                    if (sqrt(x.toDouble().pow(2.0) + y.toDouble().pow(2.0) + z.toDouble().pow(2.0)) <= radius) {
+                        for (ore in variant.orePlacements) {
+                            if (ore.tryPlace(level(), pos)) {
+                                break
                             }
                         }
                     }
                 }
             }
-            level().broadcastEntityEvent(this, 14)
-            discard()
-            triggerOnDeathMobEffects(RemovalReason.KILLED)
-            spawnLingeringCloud()
         }
     }
 
