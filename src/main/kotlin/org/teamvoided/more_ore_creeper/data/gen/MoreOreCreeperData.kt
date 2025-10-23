@@ -9,7 +9,6 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderLookup.RegistryLookup
 import net.minecraft.core.RegistrySetBuilder
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
-import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.gen.prov.BiomeTagsProvider
 import org.teamvoided.more_ore_creeper.data.gen.prov.BlockTagsProvider
 import org.teamvoided.more_ore_creeper.data.gen.prov.EnglishTranslationProvider

@@ -124,7 +124,7 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
                         random.nextGaussian() * maxSpeed,
                         random.nextGaussian() * maxSpeed
                     )
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     log.warn("Could not spawn particle effect {}", particle)
                     break
                 }

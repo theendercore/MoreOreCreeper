@@ -15,7 +15,7 @@ class MOCConfig : Config(id(MODID)) {
     var customExplodeEffects = true
 
     @NonSync
-    var creeperParticleAmount = 500
+    var creeperParticleAmount = 512
 
     fun isBlowUp() = moddedCreepersExplodeLikeVanillaOnes
 }

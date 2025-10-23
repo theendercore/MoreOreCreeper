@@ -1,5 +1,6 @@
 package org.teamvoided.more_ore_creeper.entity
 
+import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderSet
@@ -22,7 +23,7 @@ class OrePlacement(val replaceList: HolderSet<Block>, val oreState: BlockStatePr
     }
 
     companion object {
-        val CODEC = RecordCodecBuilder.mapCodec {
+        val CODEC: MapCodec<OrePlacement> = RecordCodecBuilder.mapCodec {
             it.group(
                 RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("replace_list")
                     .forGetter(OrePlacement::replaceList),

@@ -13,5 +13,6 @@ object MOCRegistries {
         DynamicRegistries.registerSynced(ORE_CREEPER_VARIANT, OreCreeperVariant.CODEC)
     }
 
+    @Suppress("SameParameterValue")
     private fun <T> createRegistryKey(id: String): ResourceKey<Registry<T>> = ResourceKey.createRegistryKey<T>(id(id))
 }
