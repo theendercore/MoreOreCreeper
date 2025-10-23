@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentType
 import net.minecraft.resources.ResourceKey
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
-import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
 
 @Suppress("UnstableApiUsage")
 object MOCAttachmentTypes {

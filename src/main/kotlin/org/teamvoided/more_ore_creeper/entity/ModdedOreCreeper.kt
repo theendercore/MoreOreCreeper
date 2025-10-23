@@ -16,6 +16,7 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.config
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
 import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
 import org.teamvoided.more_ore_creeper.init.MOCRegistries

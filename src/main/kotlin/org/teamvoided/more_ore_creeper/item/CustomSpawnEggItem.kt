@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.item.component.CustomData
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
-import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.init.MOCItems.MODDED_ORE_CREEPER_SPAWN_EGG
 import org.teamvoided.more_ore_creeper.init.MOCRegistries
 

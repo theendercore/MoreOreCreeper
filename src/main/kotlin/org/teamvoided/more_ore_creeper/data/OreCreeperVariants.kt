@@ -3,7 +3,7 @@ package org.teamvoided.more_ore_creeper.data
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
-import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.init.MOCRegistries.ORE_CREEPER_VARIANT
 
 object OreCreeperVariants {

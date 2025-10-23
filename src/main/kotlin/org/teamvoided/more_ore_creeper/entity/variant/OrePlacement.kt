@@ -1,4 +1,4 @@
-package org.teamvoided.more_ore_creeper.entity
+package org.teamvoided.more_ore_creeper.entity.variant
 
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder

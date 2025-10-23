@@ -27,7 +27,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
-import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.misc.customLootTable
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer

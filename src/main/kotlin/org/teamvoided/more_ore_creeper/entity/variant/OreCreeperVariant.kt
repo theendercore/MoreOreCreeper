@@ -1,4 +1,4 @@
-package org.teamvoided.more_ore_creeper.entity
+package org.teamvoided.more_ore_creeper.entity.variant
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
@@ -9,7 +9,6 @@ import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.biome.Biome
-import org.teamvoided.more_ore_creeper.entity.variant.ExplodeEffect
 import java.util.*
 
 data class OreCreeperVariant(

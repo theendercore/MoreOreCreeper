@@ -21,8 +21,8 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.data.tags.MOCBiomeTags
 import org.teamvoided.more_ore_creeper.data.tags.MOCBlockTags
-import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
-import org.teamvoided.more_ore_creeper.entity.OrePlacement
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
+import org.teamvoided.more_ore_creeper.entity.variant.OrePlacement
 import org.teamvoided.more_ore_creeper.entity.variant.ExplodeEffect
 import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
 import java.util.*
