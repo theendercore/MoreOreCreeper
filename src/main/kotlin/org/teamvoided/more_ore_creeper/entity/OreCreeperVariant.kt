@@ -20,6 +20,7 @@ data class OreCreeperVariant(
     val orePlacements: List<OrePlacement>,
     val spawnEggColor1: Int,
     val spawnEggColor2: Int,
+    val maxSpawnYLevel: Int,
     val explodeEffect: Optional<ExplodeEffect>,
 ) {
     fun getTextureLoc() = getFullTextureId(texture)
@@ -35,6 +36,7 @@ data class OreCreeperVariant(
                     .forGetter(OreCreeperVariant::orePlacements),
                 Codec.INT.fieldOf("spawn_egg_color_1").forGetter(OreCreeperVariant::spawnEggColor1),
                 Codec.INT.fieldOf("spawn_egg_color_2").forGetter(OreCreeperVariant::spawnEggColor2),
+                Codec.INT.fieldOf("max_spawn_y_level").forGetter(OreCreeperVariant::maxSpawnYLevel),
                 ExplodeEffect.CODEC.codec().optionalFieldOf("explode_effect")
                     .forGetter(OreCreeperVariant::explodeEffect)
             ).apply(it, ::OreCreeperVariant)

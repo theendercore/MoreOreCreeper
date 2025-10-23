@@ -31,6 +31,11 @@ object OreCreeperVariantProv {
     val MISSING = texture("missing")
     val tempTexture = id("ore_creeper", "entity/coal_creeper")
     const val RADIUS = 3.75f
+    const val MAX_Y = 320
+    const val STONE_COLOR = 8421504
+    const val NETHERRACK_COLOR = 9109504
+    const val ENDSTONE_COLOR = -1
+
     fun bootstrap(c: BootstrapContext<OreCreeperVariant>) = c.create()
     fun BootstrapContext<OreCreeperVariant>.create() {
         registerDefault(OreCreeperVariants.MISSING)
@@ -51,7 +56,7 @@ object OreCreeperVariantProv {
                     Randomium.RANDOMIUM_ORE_END.get() to 6, Blocks.AIR to 4,
                 )
             ),
-            0xff_847e87 to 0xff_76428a
+            STONE_COLOR to 0xff_76428a, MAX_Y
         )
     }
 
@@ -59,7 +64,7 @@ object OreCreeperVariantProv {
         return this.register(
             registryKey, MOCBiomeTags.VOID, MISSING,
             listOf(color(0x0), color(0xff_76428a)),
-            RADIUS, listOf(), 0xff_00_00_00 to 0xff_76428a
+            RADIUS, listOf(), 0xff_00_00_00 to 0xff_76428a, MAX_Y
         )
     }
 
@@ -71,8 +76,9 @@ object OreCreeperVariantProv {
         radius: Float,
         orePlacements: List<OrePlacement>,
         spawnEggColors: Pair<Number, Number>,
+        maxSpawnYLevel: Int,
     ): Holder.Reference<OreCreeperVariant> {
-        return register(key, biomes, texture, particles, radius, orePlacements, spawnEggColors, null)
+        return register(key, biomes, texture, particles, radius, orePlacements, spawnEggColors, maxSpawnYLevel, null)
     }
 
     fun BootstrapContext<OreCreeperVariant>.register(
@@ -83,6 +89,7 @@ object OreCreeperVariantProv {
         radius: Float,
         orePlacements: List<OrePlacement>,
         spawnEggColors: Pair<Number, Number>,
+        maxSpawnYLevel: Int,
         explodeEffect: ExplodeEffect?,
     ): Holder.Reference<OreCreeperVariant> {
         return this.register(
@@ -94,6 +101,7 @@ object OreCreeperVariantProv {
                 radius,
                 orePlacements,
                 spawnEggColors.first.toInt(), spawnEggColors.second.toInt(),
+                maxSpawnYLevel,
                 Optional.ofNullable(explodeEffect)
             )
         )
