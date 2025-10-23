@@ -4,6 +4,7 @@ package org.teamvoided.more_ore_creeper.data.gen.prov
 import net.mehvahdjukaar.randomium.Randomium
 import net.minecraft.core.Holder
 import net.minecraft.core.particles.ColorParticleOption
+import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
@@ -64,7 +65,7 @@ object OreCreeperVariantProv {
         key: ResourceKey<OreCreeperVariant>,
         biomes: TagKey<Biome>,
         texture: ResourceLocation,
-        particles: List<ColorParticleOption>,
+        particles: List<ParticleOptions>,
         radius: Float,
         orePlacements: List<OrePlacement>,
         spawnEggColors: Pair<Number, Number>,
