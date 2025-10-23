@@ -32,8 +32,8 @@ object OreCreeperVariantProv {
     val tempTexture = id("ore_creeper", "entity/coal_creeper")
     const val RADIUS = 3.75f
     const val MAX_Y = 320
-    const val STONE_COLOR = 8421504
-    const val NETHERRACK_COLOR = 9109504
+    const val STONE_COLOR = 0xff_808080
+    const val NETHERRACK_COLOR = 0xff_8B0000
     const val ENDSTONE_COLOR = -1
 
     fun bootstrap(c: BootstrapContext<OreCreeperVariant>) = c.create()
@@ -63,8 +63,8 @@ object OreCreeperVariantProv {
     fun BootstrapContext<OreCreeperVariant>.registerDefault(registryKey: ResourceKey<OreCreeperVariant>): Holder.Reference<OreCreeperVariant> {
         return this.register(
             registryKey, MOCBiomeTags.VOID, MISSING,
-            listOf(color(0x0), color(0xff_76428a)),
-            RADIUS, listOf(), 0xff_00_00_00 to 0xff_76428a, MAX_Y
+            listOf(color(0x0), color(0xff_fa00ff)),
+            RADIUS, listOf(), 0xff_00_00_00 to 0xff_fa00ff, MAX_Y
         )
     }
 
