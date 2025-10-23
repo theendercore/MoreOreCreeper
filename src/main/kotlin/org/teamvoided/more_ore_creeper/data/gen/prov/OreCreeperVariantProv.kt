@@ -23,28 +23,30 @@ import org.teamvoided.more_ore_creeper.data.tags.MOCBiomeTags
 import org.teamvoided.more_ore_creeper.data.tags.MOCBlockTags
 import org.teamvoided.more_ore_creeper.entity.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.entity.OrePlacement
+import org.teamvoided.more_ore_creeper.entity.variant.ExplodeEffect
 import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
+import java.util.*
 
 object OreCreeperVariantProv {
     val MISSING = texture("missing")
     val tempTexture = id("ore_creeper", "entity/coal_creeper")
     const val RADIUS = 3.75f
-
-    fun bootstrap(c: BootstrapContext<OreCreeperVariant>) {
-        c.registerDefault(OreCreeperVariants.MISSING)
-        c.register(
+    fun bootstrap(c: BootstrapContext<OreCreeperVariant>) = c.create()
+    fun BootstrapContext<OreCreeperVariant>.create() {
+        registerDefault(OreCreeperVariants.MISSING)
+        register(
             OreCreeperVariants.RANDOMIUM,
             BiomeTags.IS_OVERWORLD, tempTexture, listOf(color(0xff_76428a)), RADIUS,
             listOf(
-                c.placement(
+                placement(
                     MOCBlockTags.STONE_ORE_REPLACEABLE,
                     Randomium.RANDOMIUM_ORE.get() to 6, Blocks.AIR to 4,
                 ),
-                c.placement(
+                placement(
                     MOCBlockTags.DEEPSLATE_ORE_REPLACEABLE,
                     Randomium.RANDOMIUM_ORE_DEEP.get() to 6, Blocks.AIR to 4,
                 ),
-                c.placement(
+                placement(
                     MOCBlockTags.END_ORE_REPLACEABLE,
                     Randomium.RANDOMIUM_ORE_END.get() to 6, Blocks.AIR to 4,
                 )
@@ -61,7 +63,7 @@ object OreCreeperVariantProv {
         )
     }
 
-    private fun BootstrapContext<OreCreeperVariant>.register(
+    fun BootstrapContext<OreCreeperVariant>.register(
         key: ResourceKey<OreCreeperVariant>,
         biomes: TagKey<Biome>,
         texture: ResourceLocation,
@@ -69,6 +71,19 @@ object OreCreeperVariantProv {
         radius: Float,
         orePlacements: List<OrePlacement>,
         spawnEggColors: Pair<Number, Number>,
+    ): Holder.Reference<OreCreeperVariant> {
+        return register(key, biomes, texture, particles, radius, orePlacements, spawnEggColors, null)
+    }
+
+    fun BootstrapContext<OreCreeperVariant>.register(
+        key: ResourceKey<OreCreeperVariant>,
+        biomes: TagKey<Biome>,
+        texture: ResourceLocation,
+        particles: List<ParticleOptions>,
+        radius: Float,
+        orePlacements: List<OrePlacement>,
+        spawnEggColors: Pair<Number, Number>,
+        explodeEffect: ExplodeEffect?,
     ): Holder.Reference<OreCreeperVariant> {
         return this.register(
             key,
@@ -78,7 +93,8 @@ object OreCreeperVariantProv {
                 particles,
                 radius,
                 orePlacements,
-                spawnEggColors.first.toInt(), spawnEggColors.second.toInt()
+                spawnEggColors.first.toInt(), spawnEggColors.second.toInt(),
+                Optional.ofNullable(explodeEffect)
             )
         )
     }

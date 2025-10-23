@@ -75,11 +75,19 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
         if (isMissing()) return
 
         val r = ceil(radius).toInt()
-        level().explode(
-            this, x, y, z,
-            if (config.isBlowUp()) radius else 0f,
-            if (config.isBlowUp()) ExplosionInteraction.MOB else ExplosionInteraction.NONE
-        )
+        val optional = variant.explodeEffect
+        if (config.customExplodeEffects && optional.isPresent) {
+            val effect = optional.get()
+            if (random.nextFloat() <= effect.chance) {
+                level().explode(this, x, y, z, effect.power, effect.type)
+            }
+        } else {
+            level().explode(
+                this, x, y, z,
+                if (config.isBlowUp()) radius else 0f,
+                if (config.isBlowUp()) ExplosionInteraction.MOB else ExplosionInteraction.NONE
+            )
+        }
 
         if (variant.orePlacements.isEmpty()) return
         for (x in -r..r) {

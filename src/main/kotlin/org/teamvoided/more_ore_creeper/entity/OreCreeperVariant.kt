@@ -9,6 +9,8 @@ import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.biome.Biome
+import org.teamvoided.more_ore_creeper.entity.variant.ExplodeEffect
+import java.util.*
 
 data class OreCreeperVariant(
     val biomes: HolderSet<Biome>,
@@ -18,6 +20,7 @@ data class OreCreeperVariant(
     val orePlacements: List<OrePlacement>,
     val spawnEggColor1: Int,
     val spawnEggColor2: Int,
+    val explodeEffect: Optional<ExplodeEffect>,
 ) {
     fun getTextureLoc() = getFullTextureId(texture)
 
@@ -26,13 +29,14 @@ data class OreCreeperVariant(
             it.group(
                 RegistryCodecs.homogeneousList(Registries.BIOME).fieldOf("biomes").forGetter(OreCreeperVariant::biomes),
                 ResourceLocation.CODEC.fieldOf("texture").forGetter(OreCreeperVariant::texture),
-                ParticleTypes.CODEC.listOf().fieldOf("particles")
-                    .forGetter(OreCreeperVariant::particles),
-                Codec.FLOAT.fieldOf("explosion_radius").forGetter(OreCreeperVariant::radius),
+                ParticleTypes.CODEC.listOf().fieldOf("particles").forGetter(OreCreeperVariant::particles),
+                Codec.floatRange(0f, 256f).fieldOf("explosion_radius").forGetter(OreCreeperVariant::radius),
                 OrePlacement.CODEC.codec().listOf().fieldOf("ore_placements")
                     .forGetter(OreCreeperVariant::orePlacements),
                 Codec.INT.fieldOf("spawn_egg_color_1").forGetter(OreCreeperVariant::spawnEggColor1),
                 Codec.INT.fieldOf("spawn_egg_color_2").forGetter(OreCreeperVariant::spawnEggColor2),
+                ExplodeEffect.CODEC.codec().optionalFieldOf("explode_effect")
+                    .forGetter(OreCreeperVariant::explodeEffect)
             ).apply(it, ::OreCreeperVariant)
         }
 
