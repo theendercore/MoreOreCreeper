@@ -42,7 +42,7 @@ object OreCreeperVariantProv {
         registerDefault(OreCreeperVariants.MISSING)
         register(
             OreCreeperVariants.RANDOMIUM,
-            BiomeTags.IS_OVERWORLD, tempTexture, listOf(color(0xff_76428a)), RADIUS,
+            BiomeTags.IS_OVERWORLD, texture("randomium"), listOf(color(0xff_76428a)), RADIUS,
             listOf(
                 placement(
                     MOCBlockTags.STONE_ORE_REPLACEABLE,
@@ -61,7 +61,7 @@ object OreCreeperVariantProv {
         )
         register(
             OreCreeperVariants.GEM_VEIN,
-            BiomeTags.IS_OVERWORLD, tempTexture, listOf(
+            BiomeTags.IS_OVERWORLD, texture("gem_vein"), listOf(
                 color(0xff_bb1b2a), color(0xff_134dd4),
                 color(0xff_b56bff), color(0xff_ff941c),
                 color(0xff_39aa69), color(0xff_f5c721),
