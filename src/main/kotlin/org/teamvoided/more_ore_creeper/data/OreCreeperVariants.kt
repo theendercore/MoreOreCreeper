@@ -11,6 +11,7 @@ object OreCreeperVariants {
     val MISSING = create("missing")
 
     val RANDOMIUM = create("randomium", "randomium")
+    val GEM_VEIN = create("jewelry", "gem_vein")
 
     fun create(path: String) = create(id(path))
     fun create(namespace: String, path: String) = create(id(namespace, path))

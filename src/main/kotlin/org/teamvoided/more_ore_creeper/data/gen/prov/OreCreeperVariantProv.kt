@@ -1,6 +1,7 @@
 package org.teamvoided.more_ore_creeper.data.gen.prov
 
 
+import net.jewelry.blocks.JewelryBlocks
 import net.mehvahdjukaar.randomium.Randomium
 import net.minecraft.core.Holder
 import net.minecraft.core.particles.ColorParticleOption
@@ -21,9 +22,9 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.data.tags.MOCBiomeTags
 import org.teamvoided.more_ore_creeper.data.tags.MOCBlockTags
+import org.teamvoided.more_ore_creeper.entity.variant.ExplodeEffect
 import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
 import org.teamvoided.more_ore_creeper.entity.variant.OrePlacement
-import org.teamvoided.more_ore_creeper.entity.variant.ExplodeEffect
 import org.teamvoided.more_ore_creeper.init.MOCParticleTypes
 import java.util.*
 
@@ -57,6 +58,25 @@ object OreCreeperVariantProv {
                 )
             ),
             STONE_COLOR to 0xff_76428a, MAX_Y
+        )
+        register(
+            OreCreeperVariants.GEM_VEIN,
+            BiomeTags.IS_OVERWORLD, tempTexture, listOf(
+                color(0xff_bb1b2a), color(0xff_134dd4),
+                color(0xff_b56bff), color(0xff_ff941c),
+                color(0xff_39aa69), color(0xff_f5c721),
+            ), RADIUS,
+            listOf(
+                placement(
+                    MOCBlockTags.STONE_ORE_REPLACEABLE,
+                    JewelryBlocks.GEM_VEIN.block() to 6, Blocks.AIR to 4,
+                ),
+                placement(
+                    MOCBlockTags.DEEPSLATE_ORE_REPLACEABLE,
+                    JewelryBlocks.DEEPSLATE_GEM_VEIN.block() to 6, Blocks.AIR to 4,
+                )
+            ),
+            STONE_COLOR to 0xff_134dd4, MAX_Y
         )
     }
 

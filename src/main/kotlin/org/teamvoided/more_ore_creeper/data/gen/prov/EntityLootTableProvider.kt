@@ -3,6 +3,7 @@ package org.teamvoided.more_ore_creeper.data.gen.prov
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions
+import net.jewelry.items.Gems
 import net.mehvahdjukaar.randomium.Randomium
 import net.minecraft.advancements.critereon.*
 import net.minecraft.core.HolderLookup
@@ -41,6 +42,11 @@ class EntityLootTableProvider(o: FabricDataOutput, r: CompletableFuture<HolderLo
             OreCreeperVariants.RANDOMIUM,
             Randomium.RANDOMIUM_ORE.get().asItem(), 12, 4,
             Randomium.RANDOMIUM_ITEM.get(), 2, 0.2f
+        )
+        creeperDrops(
+            OreCreeperVariants.GEM_VEIN,
+            Gems.jade.item, 12, 4,
+            Gems.sapphire.item, 2, 0.2f
         )
     }
 
