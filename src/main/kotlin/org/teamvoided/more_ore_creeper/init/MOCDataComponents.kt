@@ -7,6 +7,7 @@ import net.minecraft.resources.RegistryFixedCodec
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 
 object MOCDataComponents {
+    @JvmField
     val VARIANT =
         register("variant") { it.persistent(RegistryFixedCodec.create(MOCRegistries.ORE_CREEPER_VARIANT)).build() }
 

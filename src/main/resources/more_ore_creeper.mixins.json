@@ -3,7 +3,9 @@
   "minVersion": "0.8",
   "package": "org.teamvoided.more_ore_creeper.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "EntityTypeMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
