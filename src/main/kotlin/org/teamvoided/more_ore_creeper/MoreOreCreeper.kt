@@ -31,6 +31,7 @@ object MoreOreCreeper {
         MOCParticleTypes.init()
         MOCRegistries.init()
         MOCAttachmentTypes.init()
+        MOCDataComponents.init()
         MOCEntityTypes.init()
         MOCItems.init()
 
