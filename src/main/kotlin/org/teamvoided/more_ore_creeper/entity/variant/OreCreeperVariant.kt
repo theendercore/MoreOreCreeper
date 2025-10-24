@@ -2,13 +2,17 @@ package org.teamvoided.more_ore_creeper.entity.variant
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Holder
 import net.minecraft.core.HolderSet
 import net.minecraft.core.RegistryCodecs
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.biome.Biome
+import org.teamvoided.more_ore_creeper.init.MOCRegistries
 import java.util.*
 
 data class OreCreeperVariant(
@@ -41,5 +45,25 @@ data class OreCreeperVariant(
 
         private fun getFullTextureId(texture: ResourceLocation): ResourceLocation =
             texture.withPath { "textures/$it.png" }
+
+
+        fun getVariant(world: LevelAccessor, pos: BlockPos): Holder.Reference<OreCreeperVariant?>? {
+            val lookup = world.registryAccess().lookupOrThrow(MOCRegistries.ORE_CREEPER_VARIANT)
+
+            for (variant in lookup.listElements()) {
+                if (pos.y < variant.value().maxSpawnYLevel && variant.value().biomes.contains(world.getBiome(pos))) {
+                    return variant
+                }
+            }
+            return null
+        }
+
+        fun getAllVariants(world: LevelAccessor, pos: BlockPos): List<Holder.Reference<OreCreeperVariant>> {
+            val lookup = world.registryAccess().lookupOrThrow(MOCRegistries.ORE_CREEPER_VARIANT)
+
+            return lookup.listElements().toList().filter {
+                pos.y < it.value().maxSpawnYLevel && it.value().biomes.contains(world.getBiome(pos))
+            }
+        }
     }
 }

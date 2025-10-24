@@ -82,7 +82,7 @@ object OreCreeperVariantProv {
 
     fun BootstrapContext<OreCreeperVariant>.registerDefault(registryKey: ResourceKey<OreCreeperVariant>): Holder.Reference<OreCreeperVariant> {
         return this.register(
-            registryKey, MOCBiomeTags.VOID, MISSING,
+            registryKey, MOCBiomeTags.GLOBAL_BLACKLIST, MISSING,
             listOf(color(0x0), color(0xff_fa00ff)),
             RADIUS, listOf(), listOf(0xff_00_00_00, 0xff_fa00ff), MAX_Y
         )

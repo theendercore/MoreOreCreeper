@@ -7,17 +7,21 @@ import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
+import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.Level.ExplosionInteraction
+import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.storage.loot.LootTable
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.MODID
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.config
 import org.teamvoided.more_ore_creeper.MoreOreCreeper.log
 import org.teamvoided.more_ore_creeper.data.OreCreeperVariants
 import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant
+import org.teamvoided.more_ore_creeper.entity.variant.OreCreeperVariant.Companion.getVariant
 import org.teamvoided.more_ore_creeper.init.MOCAttachmentTypes.ORE_CREEPER_VARIANT
 import org.teamvoided.more_ore_creeper.init.MOCDataComponents
 import org.teamvoided.more_ore_creeper.init.MOCEntityTypes
@@ -140,6 +144,22 @@ class ModdedOreCreeper(type: EntityType<out AbstractOreCreeperEntity>, level: Le
             }
         } else {
             super.handleEntityEvent(b)
+        }
+    }
+
+    companion object {
+        fun canSpawn(
+            creeper: EntityType<ModdedOreCreeper>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            if (!isDarkEnoughToSpawn(world, pos, random) || !checkMobSpawnRules(creeper, world, reason, pos, random)) {
+                return false
+            }
+
+            return getVariant(world, pos) != null
         }
     }
 }

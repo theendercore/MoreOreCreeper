@@ -1,5 +1,6 @@
 package org.teamvoided.more_ore_creeper.data.gen.prov
 
+import net.bunten.enderscape.registry.EnderscapeBiomes
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
@@ -12,6 +13,9 @@ import java.util.concurrent.CompletableFuture
 class BiomeTagsProvider(o: FabricDataOutput, r: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider<Biome>(o, Registries.BIOME, r) {
     override fun addTags(arg: HolderLookup.Provider) {
-        getOrCreateTagBuilder(MOCBiomeTags.VOID).add(Biomes.THE_VOID)
+        getOrCreateTagBuilder(MOCBiomeTags.GLOBAL_BLACKLIST)
+            .add(Biomes.THE_VOID)
+            .addOptional(EnderscapeBiomes.VOID_SKIES)
+            .addOptional(EnderscapeBiomes.VOID_DEPTHS)
     }
 }

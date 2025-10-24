@@ -7,7 +7,7 @@ import org.teamvoided.more_ore_creeper.MoreOreCreeper.id
 
 
 object MOCBiomeTags {
-    val VOID = create("void")
+    val GLOBAL_BLACKLIST = create("global_blacklist")
 
     fun create(id: String): TagKey<Biome> = TagKey.create(Registries.BIOME, id(id))
 
