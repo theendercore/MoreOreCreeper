@@ -17,8 +17,7 @@ data class OreCreeperVariant(
     val particles: List<ParticleOptions>,
     val radius: Float,
     val orePlacements: List<OrePlacement>,
-    val spawnEggColor1: Int,
-    val spawnEggColor2: Int,
+    val spawnEggColors: List<Int>,
     val maxSpawnYLevel: Int,
     val explodeEffect: Optional<ExplodeEffect>,
 ) {
@@ -33,8 +32,7 @@ data class OreCreeperVariant(
                 Codec.floatRange(0f, 256f).fieldOf("explosion_radius").forGetter(OreCreeperVariant::radius),
                 OrePlacement.CODEC.codec().listOf().fieldOf("ore_placements")
                     .forGetter(OreCreeperVariant::orePlacements),
-                Codec.INT.fieldOf("spawn_egg_color_1").forGetter(OreCreeperVariant::spawnEggColor1),
-                Codec.INT.fieldOf("spawn_egg_color_2").forGetter(OreCreeperVariant::spawnEggColor2),
+                Codec.INT.listOf().fieldOf("spawn_egg_colors").forGetter(OreCreeperVariant::spawnEggColors),
                 Codec.INT.fieldOf("max_spawn_y_level").forGetter(OreCreeperVariant::maxSpawnYLevel),
                 ExplodeEffect.CODEC.codec().optionalFieldOf("explode_effect")
                     .forGetter(OreCreeperVariant::explodeEffect)

@@ -31,9 +31,8 @@ class CustomSpawnEggItem(entityType: EntityType<out Mob>, i: Int, j: Int, proper
         }
 
         @JvmStatic
-        fun getCustomColor(stack: ItemStack, i: Int): Int? {
-            val variant = stack.get(MOCDataComponents.VARIANT)?.value() ?: return null
-            return if (i == 0) variant.spawnEggColor1 else variant.spawnEggColor2
+        fun getCustomColor(stack: ItemStack, layer: Int): Int? {
+            return stack.get(MOCDataComponents.VARIANT)?.value()?.spawnEggColors?.getOrNull(layer)
         }
     }
 }

@@ -57,7 +57,7 @@ object OreCreeperVariantProv {
                     Randomium.RANDOMIUM_ORE_END.get() to 6, Blocks.AIR to 4,
                 )
             ),
-            STONE_COLOR to 0xff_76428a, MAX_Y
+            listOf(STONE_COLOR, 0xff_76428a), MAX_Y
         )
         register(
             OreCreeperVariants.GEM_VEIN,
@@ -76,7 +76,7 @@ object OreCreeperVariantProv {
                     JewelryBlocks.DEEPSLATE_GEM_VEIN.block() to 6, Blocks.AIR to 4,
                 )
             ),
-            STONE_COLOR to 0xff_134dd4, MAX_Y
+            listOf(STONE_COLOR, 0xff_134dd4), MAX_Y
         )
     }
 
@@ -84,7 +84,7 @@ object OreCreeperVariantProv {
         return this.register(
             registryKey, MOCBiomeTags.VOID, MISSING,
             listOf(color(0x0), color(0xff_fa00ff)),
-            RADIUS, listOf(), 0xff_00_00_00 to 0xff_fa00ff, MAX_Y
+            RADIUS, listOf(), listOf(0xff_00_00_00, 0xff_fa00ff), MAX_Y
         )
     }
 
@@ -95,7 +95,7 @@ object OreCreeperVariantProv {
         particles: List<ParticleOptions>,
         radius: Float,
         orePlacements: List<OrePlacement>,
-        spawnEggColors: Pair<Number, Number>,
+        spawnEggColors: List<Number>,
         maxSpawnYLevel: Int,
     ): Holder.Reference<OreCreeperVariant> {
         return register(key, biomes, texture, particles, radius, orePlacements, spawnEggColors, maxSpawnYLevel, null)
@@ -108,7 +108,7 @@ object OreCreeperVariantProv {
         particles: List<ParticleOptions>,
         radius: Float,
         orePlacements: List<OrePlacement>,
-        spawnEggColors: Pair<Number, Number>,
+        spawnEggColors: List<Number>,
         maxSpawnYLevel: Int,
         explodeEffect: ExplodeEffect?,
     ): Holder.Reference<OreCreeperVariant> {
@@ -120,7 +120,7 @@ object OreCreeperVariantProv {
                 particles,
                 radius,
                 orePlacements,
-                spawnEggColors.first.toInt(), spawnEggColors.second.toInt(),
+                spawnEggColors.map(Number::toInt),
                 maxSpawnYLevel,
                 Optional.ofNullable(explodeEffect)
             )
